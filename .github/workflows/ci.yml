@@ -9,51 +9,52 @@ on:
 jobs:
   build-and-test:
     runs-on: windows-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-      - name: Setup .NET 10
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
+    - name: Setup .NET 10
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
 
-      - name: Install Playwright Browsers
-        run: dotnet playwright install
-        working-directory: . 
+     - name: Install Playwright Browsers
+       run: dotnet playwright install
+       working-directory: . 
 
-      - name: Restore dependencies
-        run: dotnet ParabankTestAutomation.slnx restore
+     - name: Restore dependencies
+       run: dotnet ParabankTestAutomation.slnx restore
 
-      - name: Build
-       run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
+     - name: Build
+      run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
 
-      - name: Run tests
-        run: dotnet test ParabankTestAutomation.slnx --no-build --logger:"trx"
-        continue-on-error: true
+     - name: Run tests
+       run: dotnet test ParabankTestAutomation.slnx --no-build --logger:"trx"
+       continue-on-error: true
 
-      - name: Upload Test Results
+     - name: Upload Test Results
+       uses: actions/upload-artifact@v4
+       with:
+         name: test-results
+         path: '**/TestResults/*.trx'
+
+     - name: Upload Playwright HTML Report and Screenshots
+       uses: actions/upload-artifact@v4
+       with:
+        name: playwright-traces
+        path: bin/Traces/
+
+     - name: Upload Logs
+       uses: actions/upload-artifact@v4
+       with:
+        name: playwright-logs
+        path: bin/Logs/
+
+      - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: '**/TestResults/*.trx'
-
-      - name: Upload Playwright HTML Report and Screenshots
-        uses: actions/upload-artifact@v4
-        with:
-         name: playwright-traces
-         path: bin/Traces/
-
-      - name: Upload Logs
-        uses: actions/upload-artifact@v4
-        with:
-         name: playwright-logs
-         path: bin/Logs/
-
-       - name: Upload Screenshots
-         uses: actions/upload-artifact@v4
-         with:
-          name: playwright-screenshots
-          path: bin/Screenshots/
+         name: playwright-screenshots
+         path: bin/Screenshots/
 
     
