@@ -20,7 +20,7 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore dependencies
-      run: dotnet ParabankTestAutomation.slnx restore
+      run: dotnet restore ParabankTestAutomation.slnx
 
     - name: Build
       run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
