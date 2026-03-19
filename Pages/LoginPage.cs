@@ -13,7 +13,6 @@ namespace ParabankTestAutomation.Tests.Pages
         public string Password => "input[name='password']";
         public string LoginButton => "input[type='submit']";
         public string ErrorMessage => ".error";
-        // public string ErrorMessage => ".title";
         public string AccountOverviewTitle => ".title";
 
         public LoginPage(IPage page)
