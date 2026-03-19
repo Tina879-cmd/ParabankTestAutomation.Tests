@@ -24,10 +24,6 @@ jobs:
 
     - name: Build
       run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
-      
-    - name: Install Playwright Browsers
-      run: dotnet playwright install
-      working-directory: .
 
     - name: Run tests
       run: dotnet test ParabankTestAutomation.slnx --no-build --logger:"trx"
