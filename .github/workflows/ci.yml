@@ -7,8 +7,9 @@ on:
     branches: [ main ]
 
 jobs:
-  CI Integration:
+  build-and-test:
     runs-on: windows-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -18,15 +19,15 @@ jobs:
       with:
         dotnet-version: '10.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore ParabankTestAutomation.slnx
-      
-    - name: Build
-      run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
-
     - name: Install Playwright Browsers
       run: dotnet playwright install
-      working-directory: .
+      working-directory: . 
+
+    - name: Restore dependencies
+      run: dotnet ParabankTestAutomation.slnx restore
+
+    - name: Build
+      run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
 
     - name: Run tests
       run: dotnet test ParabankTestAutomation.slnx --no-build --logger:"trx"
@@ -38,11 +39,22 @@ jobs:
         name: test-results
         path: '**/TestResults/*.trx'
 
-     - name: Upload Playwright HTML Report and Screenshots
+    - name: Upload Playwright HTML Report and Screenshots
       uses: actions/upload-artifact@v4
       with:
-        name: playwright-report
-        path: |
-          **/TestResults/
-          **/traces/
-          **/Logs/
+       name: playwright-traces
+       path: bin/Traces/
+
+    - name: Upload Logs
+      uses: actions/upload-artifact@v4
+      with:
+       name: playwright-logs
+       path: bin/Logs/
+
+     - name: Upload Screenshots
+       uses: actions/upload-artifact@v4
+       with:
+        name: playwright-screenshots
+        path: bin/Screenshots/
+
+    
