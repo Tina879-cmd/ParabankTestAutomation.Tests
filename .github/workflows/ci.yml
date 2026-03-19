@@ -20,8 +20,6 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Install Playwright Browsers
-      run: dotnet tool install --global Microsoft.Playwright.CLI
-    - name: Install Playwright Browsers (run install)
       run: pwsh -Command "playwright install"
 
     - name: Restore dependencies
