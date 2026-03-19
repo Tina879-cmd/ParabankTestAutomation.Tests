@@ -38,20 +38,20 @@ jobs:
         name: test-results
         path: '**/TestResults/*.trx'
 
-    - name: Upload Playwright HTML Report and Screenshots
+    - name: Upload Playwright HTML Report
       uses: actions/upload-artifact@v4
       with:
          name: playwright-traces
-         path: bin/Traces/
+         path: bin/Release/net10.0/Traces/
 
     - name: Upload Logs
       uses: actions/upload-artifact@v4
       with:
          name: playwright-logs
-         path: bin/Logs/
+         path: bin/Release/net10.0/Logs/
 
     - name: Upload Screenshots
       uses: actions/upload-artifact@v4
       with:
          name: playwright-screenshots
-         path: bin/Screenshots/
+         path: bin/Release/net10.0/Screenshots/
