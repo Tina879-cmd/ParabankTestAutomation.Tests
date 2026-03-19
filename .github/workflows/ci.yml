@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  CI integration:
+  build-and-test:
     runs-on: windows-latest
 
     steps:
