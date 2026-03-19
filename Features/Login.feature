@@ -10,4 +10,3 @@ Feature: Login
     Given the user navigates to the login page
     When the user logs in with invalid credentials
     Then the user should view an error message "The username and password could not be verified."
-    #Then the user should view an error message "Error!"
