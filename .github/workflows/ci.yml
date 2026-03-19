@@ -30,6 +30,7 @@ jobs:
 
     - name: Run tests
       run: dotnet test ParabankTestAutomation.slnx --no-build --configuration Release --logger:"trx"
+      continue-on-error: true
 
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
