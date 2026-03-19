@@ -26,7 +26,7 @@ jobs:
       run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
 
     - name: Run tests
-      run: dotnet test ParabankTestAutomation.slnx --no-build --logger:"trx"
+      run: dotnet test ParabankTestAutomation.slnx --no-build --configuration Release --logger:"trx"
 
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
