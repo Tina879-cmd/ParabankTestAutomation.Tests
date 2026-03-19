@@ -19,15 +19,15 @@ jobs:
       with:
         dotnet-version: '10.0.x'
 
-    - name: Install Playwright Browsers
-      run: dotnet playwright install
-      working-directory: .
-
     - name: Restore dependencies
       run: dotnet ParabankTestAutomation.slnx restore
 
     - name: Build
       run: dotnet build ParabankTestAutomation.slnx --configuration Release --no-restore
+      
+    - name: Install Playwright Browsers
+      run: dotnet playwright install
+      working-directory: .
 
     - name: Run tests
       run: dotnet test ParabankTestAutomation.slnx --no-build --logger:"trx"
